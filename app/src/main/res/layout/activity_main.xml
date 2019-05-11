@@ -8,6 +8,12 @@
         tools:context=".MainActivity"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/serverBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="서버통신 텍스트"/>
+
 
 
     </LinearLayout>
