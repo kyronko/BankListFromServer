@@ -27,30 +27,43 @@ public class ConnectServer {
 
         OkHttpClient client = new OkHttpClient();
 
+//        URL 설정 => 목적지 설정
+
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BASE_URL+"/info/bank").newBuilder();
 
+//        ※ GET, DELETE메쏘드는 필요 파리미터를 URL에 담아줘야함.
+//         이 담는과정을 쉽게 하려고 urlBuilder를 사용
 
+//        실제로 서버에 접근하는 완성된 url
         String requestURL = urlBuilder.build().toString();
 
+
+//        완성된 url로 접근하는 request를 생성.
         Request request = new Request.Builder().url(requestURL).build();
 
-    client.newCall(request).enqueue(new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
 
-        }
+//        만들어진 Request를 실제로 서버에 요청.
 
-        @Override
-        public void onResponse(Call call, Response response) throws IOException {
-            String responseContent = response.body().string();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-            Log.d("서버응답내용",responseContent);
-        }
-    });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String responseContent = response.body().string();
+
+                Log.d("서버 응답 내용", responseContent);
+
+            }
+        });
 
 
 
     }
+
 
 
 }
