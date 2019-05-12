@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.tjedit.banklistfromserver.adapters.BankAdapter;
 import com.tjedit.banklistfromserver.databinding.ActivityMainBinding;
 import com.tjedit.banklistfromserver.datas.Bank;
 import com.tjedit.banklistfromserver.utils.ConnectServer;
@@ -21,6 +22,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
     ActivityMainBinding act;
     List<Bank> bankList = new ArrayList<>();
+    BankAdapter bankAdapter ;
 
 
     @Override
@@ -63,6 +65,7 @@ public class MainActivity extends BaseActivity {
 //                                            String name = bank.getString("name");
 //                                            Log.d("은해이름",name);
                                         }
+                                        bankAdapter.notifyDataSetChanged();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -91,7 +94,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setupValues() {
-
+    bankAdapter = new BankAdapter(mContext,bankList);
+    act.bankListView.setAdapter(bankAdapter);
     }
 
     @Override
